@@ -1,0 +1,274 @@
+
+
+body {
+      font-family: 'Press Start 2P', cursive;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      overflow-x: hidden;
+      background: none; 
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("images/bg.png") no-repeat center center fixed;
+      background-size: cover;
+      filter: brightness(40%); 
+      z-index: -1; 
+    }
+
+    header {
+      margin-top: 20px;
+      font-size: 20px;
+      color: #ff4d88;
+      text-shadow: 2px 2px #fff;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      width: 90%;
+      margin-top: 20px;
+      gap: 20px;
+    }
+
+    /* Pomodoro Timer */
+    .timer-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .time {
+      font-size: 50px;
+      margin: 20px 0;
+      color: #ff4d88;
+      text-shadow: 2px 2px #fff;
+    }
+
+    button {
+      font-family: 'Press Start 2P', cursive;
+      background: #fff;
+      border: 2px solid #ff4d88;
+      padding: 10px 20px;
+      border-radius: 10px;
+      margin: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 12px;
+    }
+
+    button:hover {
+      background: #ff4d88;
+      color: #fff;
+      transform: scale(1.1);
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+    }
+
+    /* Task List */
+    .task-container {
+      flex: 1;
+      background: #fff0f6;
+      border: 3px solid #ffb6c1;
+      border-radius: 15px;
+      padding: 15px;
+      box-shadow: 4px 4px #ff85a2;
+    }
+
+    .task-container h3 {
+      text-align: center;
+      color: #ff4d88;
+      margin-bottom: 10px;
+    }
+
+    .task-container ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .task-container li {
+      margin: 8px 0;
+      padding: 6px;
+      background: #ffe6ef;
+      border: 2px solid #ff99bb;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .remove-btn {
+      font-size: 10px;
+      padding: 5px;
+      background: #ff4d88;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .remove-btn:hover {
+      background: #ff99bb;
+    }
+
+    /* YouTube Panel */
+    .youtube-container {
+      flex: 1;
+      background: #f0e6ff;
+      border: 3px solid #c8a2ff;
+      border-radius: 15px;
+      padding: 15px;
+      box-shadow: 4px 4px #b299ff;
+    }
+
+    .youtube-container h3 {
+      text-align: center;
+      color: #884dff;
+      margin-bottom: 10px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 250px;
+      border-radius: 10px;
+      border: 2px solid #b299ff;
+    }
+
+    input, #add-task-btn {
+      font-family: 'Press Start 2P', cursive;
+      padding: 8px;
+      margin-top: 10px;
+      border: 2px solid #ff99bb;
+      border-radius: 8px;
+      width: 80%;
+      font-size: 10px;
+    }
+
+    #add-task-btn {
+      background: #ffb6c1;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #add-task-btn:hover {
+      background: #ff4d88;
+      color: white;
+    }
+
+    /* PawCat Chat */
+    .chat-container {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      width: 280px;
+      height: 350px;
+      background: #fff0f6;
+      border: 3px solid #ff85a2;
+      border-radius: 15px;
+      box-shadow: 4px 4px #ff85a2;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .chat-header {
+      background: #ff4d88;
+      padding: 8px;
+      color: white;
+      text-align: center;
+      border-radius: 12px 12px 0 0;
+      font-size: 12px;
+    }
+
+    .chat-body {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      font-size: 10px;
+    }
+
+    .chat-footer {
+      display: flex;
+      border-top: 2px solid #ffb6c1;
+    }
+
+    .chat-footer input {
+      flex: 1;
+      border: none;
+      padding: 5px;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 10px;
+    }
+
+    .chat-footer button {
+      border: none;
+      background: #ff4d88;
+      color: white;
+      padding: 8px;
+      cursor: pointer;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 10px;
+    }
+
+    /* Floating Cat Button */
+    .cat-toggle-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #ff4d88;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+    }
+
+    .cat-toggle-btn:hover {
+      transform: scale(1.1);
+      background: #ff85a2;
+    }
+
+    .cat-toggle-btn img {
+      width: 40px;
+      height: 40px;
+    }
+
+    .hidden {
+      transform: translateY(400px);
+    }
+
+    /* Digital Clock */
+    .digital-clock {
+      position: fixed;
+      bottom: 10px;
+      left: 20px;
+      font-size: 14px;
+      color: #ff4d88;
+      background: #fff0f6;
+      border: 2px solid #ff85a2;
+      border-radius: 10px;
+      padding: 6px 12px;
+      box-shadow: 3px 3px #ffb6c1;
+    }
+ 
+

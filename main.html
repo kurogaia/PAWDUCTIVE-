@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href ="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pawductive</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  
+
+  <header>🐾 PAWDUCTIVE 🐾</header>
+
+  <div class="container">
+    <!-- Task List -->
+    <div class="task-container">
+      <h3>📋 Task List</h3>
+      <input type="text" id="task-input" placeholder="Add new task...">
+      <button id="add-task-btn">Add Task</button>
+      <ul id="task-list"></ul>
+    </div>
+
+    <!-- Pomodoro Timer -->
+    <div class="timer-container">
+      <div>
+        <button onclick="setTimer(25)">Pomodoro</button>
+        <button onclick="setTimer(5)">Short Break</button>
+        <button onclick="setTimer(15)">Long Break</button>
+      </div>
+      <div class="time" id="time">25:00</div>
+      <div>
+        <button onclick="startTimer()">Start</button>
+        <button onclick="resetTimer()">Reset</button>
+      </div>
+    </div>
+
+    <!-- YouTube Panel -->
+    <div class="youtube-container">
+      <h3>🎵 Study Music</h3>
+      <input type="text" id="youtube-link" placeholder="Paste YouTube link...">
+      <button onclick="loadVideo()">Load Video</button>
+      <iframe id="youtube-frame" src="" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <!-- PawCat Chat -->
+  <div class="chat-container hidden" id="chatBox">
+    <div class="chat-header">Cooper The Motivator</div>
+    <div class="chat-body" id="chatBody">
+      <p><b>Pawductive Cooper:</b> Hi! I'm your study buddy 🐾 Let's stay motivated!</p>
+    </div>
+    <div class="chat-footer">
+      <input type="text" id="chatInput" placeholder="Type a message...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <!-- Floating Cat Toggle -->
+  <div class="cat-toggle-btn" id="catToggle">
+    <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Cat">
+  </div>
+
+  <!-- Digital Clock -->
+  <div class="digital-clock" id="digitalClock">00:00:00</div>
+
+  <script>
+    // Pomodoro
+    let timer;
+    let minutes = 25;
+    let seconds = 0;
+    let running = false;
+
+    function updateDisplay() {
+      document.getElementById("time").innerText =
+        String(minutes).padStart(2, '0') + ":" + String(seconds).padStart(2, '0');
+    }
+
+    function setTimer(min) {
+      clearInterval(timer);
+      minutes = min;
+      seconds = 0;
+      running = false;
+      updateDisplay();
+    }
+
+    function startTimer() {
+      if (running) return;
+      running = true;
+      timer = setInterval(() => {
+        if (seconds === 0) {
+          if (minutes === 0) {
+            clearInterval(timer);
+            running = false;
+            return;
+          }
+          minutes--;
+          seconds = 59;
+        } else {
+          seconds--;
+        }
+        updateDisplay();
+      }, 1000);
+    }
+
+    function resetTimer() {
+      clearInterval(timer);
+      minutes = 25;
+      seconds = 0;
+      running = false;
+      updateDisplay();
+    }
+
+    // Task List
+    document.getElementById("add-task-btn").addEventListener("click", function() {
+      const input = document.getElementById("task-input");
+      if (input.value.trim() !== "") {
+        const li = document.createElement("li");
+        li.textContent = input.value;
+
+        const removeBtn = document.createElement("button");
+        removeBtn.textContent = "✖";
+        removeBtn.classList.add("remove-btn");
+        removeBtn.onclick = () => li.remove();
+
+        li.appendChild(removeBtn);
+        document.getElementById("task-list").appendChild(li);
+        input.value = "";
+      }
+    });
+
+    // YouTube Embed
+    function loadVideo() {
+      const link = document.getElementById("youtube-link").value;
+      let videoId = "";
+      if (link.includes("watch?v=")) {
+        videoId = link.split("watch?v=")[1].split("&")[0];
+      } else if (link.includes("youtu.be/")) {
+        videoId = link.split("youtu.be/")[1].split("?")[0];
+      }
+      if (videoId) {
+        document.getElementById("youtube-frame").src = "https://www.youtube.com/embed/" + videoId;
+      }
+    }
+
+    // PawCat Chat Toggle
+    const catToggle = document.getElementById("catToggle");
+    const chatBox = document.getElementById("chatBox");
+
+    catToggle.addEventListener("click", () => {
+      chatBox.classList.toggle("hidden");
+    });
+
+    // Chat Send with Encouraging Phrases
+    function sendMessage() {
+      const input = document.getElementById("chatInput");
+      if (input.value.trim() !== "") {
+        const chatBody = document.getElementById("chatBody");
+        const userMsg = document.createElement("p");
+        userMsg.innerHTML = "<b>You:</b> " + input.value;
+        chatBody.appendChild(userMsg);
+
+        // Random encouraging replies
+        const phrases = [
+          "You're doing amazing! Keep it up 🐾",
+          "Don’t give up, you’re stronger than you think! 💪",
+          "One step at a time, you got this 🌸",
+          "Proud of you for studying today! 📚",
+          "Breaks are okay, just don’t stop! 🐾"
+        ];
+        const pawMsg = document.createElement("p");
+        pawMsg.innerHTML = "<b>Cooper:</b> " + phrases[Math.floor(Math.random() * phrases.length)];
+        chatBody.appendChild(pawMsg);
+
+        chatBody.scrollTop = chatBody.scrollHeight;
+        input.value = "";
+      }
+    }
+
+    // Digital Clock
+    function updateClock() {
+      const now = new Date();
+      let h = String(now.getHours()).padStart(2, '0');
+      let m = String(now.getMinutes()).padStart(2, '0');
+      let s = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById("digitalClock").innerText = h + ":" + m + ":" + s;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
+
+</body>
+</html>
